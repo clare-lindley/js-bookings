@@ -1,12 +1,3 @@
-/**
- *
- *
- * @todo Find out how to send status codes back in the reply as well as messages
- *
- *
- *
- */
-
 'use strict';
 
 const Hapi = require('hapi');
