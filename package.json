@@ -1,0 +1,30 @@
+{
+  "name": "js-bookings",
+  "version": "1.0.0",
+  "description": "Way down deep in the middle of the Congo, a developer made an API, from HAPI and a Mongo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nano-monkey/js-bookings.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "hapi",
+    "mongo"
+  ],
+  "author": "C. Lindley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nano-monkey/js-bookings/issues"
+  },
+  "homepage": "https://github.com/nano-monkey/js-bookings#readme",
+  "dependencies": {
+    "fs": "0.0.2",
+    "hapi": "^13.4.1",
+    "mongoose": "^4.4.19",
+    "path": "^0.12.7",
+    "underscore": "^1.8.3"
+  },
+  "private": true
+}
