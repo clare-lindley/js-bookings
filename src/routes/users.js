@@ -14,12 +14,14 @@ module.exports = function(){
           password: request.payload.password
         });
 
+        // @todo check this mongoose save syntax and callback
         user.save(function(err, user){
           if(err){
-            console.log(err);
+            reply(err);
           }
           else {
-            reply('User Saved ' + user._id);
+            reply({userID: user._id})
+              .type('application/json');
           }
         });
 
