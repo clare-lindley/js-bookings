@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/nano-monkey/js-bookings#readme",
   "dependencies": {
+    "async": "^2.0.0-rc.5",
     "fs": "0.0.2",
     "hapi": "^13.4.1",
     "mongoose": "^4.4.19",
