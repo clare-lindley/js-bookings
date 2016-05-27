@@ -1,6 +1,7 @@
 "use strict";
 
-var User = require('../model/user');
+const User = require('../model/user');
+const Boom = require('boom');
 
 module.exports = function(){
   return [
@@ -40,39 +41,20 @@ module.exports = function(){
         User.findById(request.params.id, function (err, user) {
 
           if (err){
-
-            // @todo find out if this is the best way to check for this.
-            // (Joi validation will catch it before we let Mongo try anyway).
             if(err.name == 'CastError'){
-              var response = {
-                'status': '400',
-                'code': 'ERR-01',
-                'details': 'Invalid User Id provided'
-              };
-              reply(response).code(400);
+              reply(Boom.badRequest('Invalid User Id'));
             }
             else {
-              reply('Server Error').code(500);
+              reply(Boom.badImplementation('routes/user.js: User.findById() just blew up'));
             }
-
           }
           else {
-
-            // here we need to check that there is actually a result before we return it
-            // findById will return 'null' if it can't find anything
             if(user){
               reply(user);
             }
             else {
-              var response = {
-                'status': '404',
-                'code': 'ERR-02',
-                'details': 'Resource not found: User does not exist'
-              };
-              reply(response).code(404);
+              reply(Boom.notFound());
             }
-
-
           }
 
         });

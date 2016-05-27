@@ -34,10 +34,9 @@ lab.experiment('Users: ', function() {
       server.inject(options, function(response){
 
         code.expect(response.result).to.be.an.object();
-        code.expect(response.result.status).to.equal('400');
-        code.expect(response.result.code).to.equal('ERR-01');
-        code.expect(response.result.details).to.equal('Invalid User Id provided');
-        code.expect(response.statusCode).to.equal(400);
+        code.expect(response.result.statusCode).to.equal(400);
+        code.expect(response.result.error).to.equal('Bad Request');
+        code.expect(response.result.message).to.equal('Invalid User Id');
 
         done();
 
@@ -54,10 +53,8 @@ lab.experiment('Users: ', function() {
       server.inject(options, function(response){
 
         code.expect(response.result).to.be.an.object();
-        code.expect(response.result.status).to.equal('404');
-        code.expect(response.result.code).to.equal('ERR-02');
-        code.expect(response.result.details).to.equal('Resource not found: User does not exist');
         code.expect(response.statusCode).to.equal(404);
+        code.expect(response.result.error).to.equal('Not Found');
 
         done();
 
@@ -65,12 +62,22 @@ lab.experiment('Users: ', function() {
 
     });
 
-  lab.test("User lookup - application error",
+  lab.test('User create - successful',
     function(done){
 
-      // here we're looking up a user with an id in the correct format but the application errors - 500 internal server error
-      done();
+      // here we're successfully creating a new a user - 200 OK
+      // and cleaning up at the end of the test by deleting the test user
+      // once the test passes.
 
+      server.inject(options, function(response){
+
+        code.expect(response.result).to.be.an.object();
+        code.expect(response.result.id).to.equal(expected);
+        code.expect(response.statusCode).to.equal(200);
+
+        done();
+
+      });
     });
 
 });
