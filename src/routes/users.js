@@ -40,6 +40,19 @@ module.exports = function(){
         User.findById(request.params.id, function (err, user) {
 
           if (err){
+            // @todo find out if this is the best way to check for this.
+            // (Joi validation will catch it before we let Mongo try anyway).
+            if(err.name == 'CastError'){
+              var response = {
+                'status': '400',
+                'code': 'ERR-01',
+                'details': 'Invalid User Id provided'
+              };
+              reply(response).code(400);
+            }
+            else {
+              reply('Server Error').code(500);
+            }
 
           }
           else {
