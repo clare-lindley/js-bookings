@@ -1,6 +1,7 @@
 # js-bookings
 
-Testing: Uses Lab Framework + Code Assertion Library
+Testing: 
+Uses Lab Framework + Code Assertion Library
 Run: npm test
 
 Usage:
