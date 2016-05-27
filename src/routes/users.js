@@ -16,10 +16,10 @@ module.exports = function(){
 
         user.save(function(err, user){
           if(err){
-            // 
+            //
           }
           else {
-            reply(user).type('application/json');
+            reply(user);
           }
         });
 
@@ -27,21 +27,32 @@ module.exports = function(){
     },
     {
       method: 'POST',
-      path: '/users/{uuid}',
+      path: '/users/{id}',
       handler: function (request, reply) {
         reply('Update User');
       }
     },
     {
       method: 'GET',
-      path: '/users/{uuid}',
+      path: '/users/{id}',
       handler: function (request, reply) {
-        reply('Get User Account details');
+
+        User.findById(request.params.id, function (err, user) {
+
+          if (err){
+
+          }
+          else {
+            reply(user);
+          }
+
+        });
+
       }
     },
     {
       method: 'DELETE',
-      path: '/users/{uuid}',
+      path: '/users/{id}',
       handler: function (request, reply) {
         reply('Delete User');
       }

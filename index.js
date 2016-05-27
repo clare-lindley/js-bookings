@@ -1,7 +1,8 @@
 'use strict';
 
 const Hapi = require('hapi');
-var routes = require('./src/routes');
+const morgan = require('morgan');
+const routes = require('./src/routes');
 
 const server = new Hapi.Server();
 server.connection({host: 'localhost', port: 3000 });
@@ -18,3 +19,5 @@ server.start((err) => {
 }
 console.log('Server running at:', server.info.uri);
 });
+
+module.exports = server;

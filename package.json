@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Way down deep in the middle of the Congo, a developer made an API, from HAPI and a Mongo",
   "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/lab/bin/lab -c"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nano-monkey/js-bookings.git"
@@ -23,10 +26,15 @@
     "async": "^2.0.0-rc.5",
     "fs": "0.0.2",
     "hapi": "^13.4.1",
+    "joi": "^8.1.1",
     "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
     "underscore": "^1.8.3"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "code": "^3.0.0",
+    "lab": "^10.7.1"
+  }
 }
