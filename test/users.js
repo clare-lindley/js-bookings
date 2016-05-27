@@ -50,7 +50,18 @@ lab.experiment('Users: ', function() {
     function(done){
 
       // here we're looking up a user with an id in the correct format but the user doesn't exist - 404 resource not found
-      done();
+      var options = {method: 'GET', url:'/users/574822a66e27ecd916949760'};
+      server.inject(options, function(response){
+
+        code.expect(response.result).to.be.an.object();
+        code.expect(response.result.status).to.equal('404');
+        code.expect(response.result.code).to.equal('ERR-02');
+        code.expect(response.result.details).to.equal('Resource not found: User does not exist');
+        code.expect(response.statusCode).to.equal(404);
+
+        done();
+
+      });
 
     });
 

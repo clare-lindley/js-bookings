@@ -40,6 +40,7 @@ module.exports = function(){
         User.findById(request.params.id, function (err, user) {
 
           if (err){
+
             // @todo find out if this is the best way to check for this.
             // (Joi validation will catch it before we let Mongo try anyway).
             if(err.name == 'CastError'){
@@ -56,7 +57,22 @@ module.exports = function(){
 
           }
           else {
-            reply(user);
+
+            // here we need to check that there is actually a result before we return it
+            // findById will return 'null' if it can't find anything
+            if(user){
+              reply(user);
+            }
+            else {
+              var response = {
+                'status': '404',
+                'code': 'ERR-02',
+                'details': 'Resource not found: User does not exist'
+              };
+              reply(response).code(404);
+            }
+
+
           }
 
         });
