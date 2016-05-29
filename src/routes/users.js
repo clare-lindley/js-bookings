@@ -10,16 +10,16 @@ module.exports = function(){
       handler: userController.create
     },
     {
+      method: 'GET',
+      path: '/users/{id}',
+      handler: userController.read
+    },
+    {
       method: 'POST',
       path: '/users/{id}',
       handler: function (request, reply) {
         reply('Update User');
       },
-    },
-    {
-      method: 'GET',
-      path: '/users/{id}',
-      handler: userController.read
     },
     {
       method: 'DELETE',
