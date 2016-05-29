@@ -125,7 +125,7 @@ lab.experiment('Users: ', function() {
         .findOne()
         .exec(function(err, user) {
           if(err){
-            console.log(error.message);
+            throw err;
           }else {
             var options = {method: 'POST', url:'/users', payload: user};
 
