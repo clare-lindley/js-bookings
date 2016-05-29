@@ -14,10 +14,10 @@ for (var route in routes) {
 
 server.start((err) => {
 
-  if (err) {
-  throw err;
-}
-console.log('Server running at:', server.info.uri);
+  if(err){
+    console.log('HAPI Error ' + err.message);
+  }
+  console.log('Server running at:', server.info.uri);
 });
 
 module.exports = server;
