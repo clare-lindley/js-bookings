@@ -12,12 +12,18 @@ module.exports = function(){
 
         var user = new User({
           username: request.payload.username,
-          password: request.payload.password
+          password: request.payload.password,
+          contact: request.payload.contact
         });
 
         user.save(function(err, user){
           if(err){
-            //
+            if(err.code === 11000){
+              reply(Boom.badRequest('User already exists'));
+            }
+            else {
+              reply(Boom.badImplementation());
+            }
           }
           else {
             reply(user);
@@ -31,7 +37,7 @@ module.exports = function(){
       path: '/users/{id}',
       handler: function (request, reply) {
         reply('Update User');
-      }
+      },
     },
     {
       method: 'GET',
@@ -41,11 +47,12 @@ module.exports = function(){
         User.findById(request.params.id, function (err, user) {
 
           if (err){
+            // @todo replce with check for Error code
             if(err.name == 'CastError'){
               reply(Boom.badRequest('Invalid User Id'));
             }
             else {
-              reply(Boom.badImplementation('routes/user.js: User.findById() just blew up'));
+              reply(Boom.badImplementation());
             }
           }
           else {

@@ -1,7 +1,7 @@
 var db = require('../../db');
 
-var userSchema = db.Schema({
-  username:  { type: String, required: true},
+var userSchema = new db.Schema({
+  username:  { type: String, required: true, unique : true},
   password: { type: String, required: true},
   created: { type: Date, default: Date.now },
   bookingId: {type: String, default: null},
@@ -11,6 +11,8 @@ var userSchema = db.Schema({
     email: String
   }
 });
+
+userSchema.path('username').index({ unique: true });
 
 var User = db.model('User', userSchema);
 
