@@ -15,7 +15,7 @@ lab.experiment('Users: ', function() {
         .findOne()
         .exec(function(err, user) {
           if(err){
-            console.log(error.message);
+            throw err;
           }else {
 
             const actual = user.id;
@@ -96,7 +96,7 @@ lab.experiment('Users: ', function() {
 
           User.findOneAndRemove({ _id: response.result.id }, function(err){
             if(err){
-              console.log(error.message)
+              throw err;
             }
             else {
               console.log('test user ' + response.result.id + ' deleted successfully');
@@ -146,12 +146,40 @@ lab.experiment('Users: ', function() {
 
     });
 
-  // User - create - invalid Payload - 400
+  lab.test('User create - required fields are missing',
+    function(done){
+
+      var payload = {}
+      var options = {method: 'POST', url:'/users', payload: payload};
+
+      server.inject(options, function(response){
+
+        code.expect(response.result).to.be.an.object();
+        code.expect(response.statusCode).to.equal(400);
+        code.expect(response.result.error).to.equal('Bad Request');
+        code.expect(response.result.message).to.equal('Missing Username or Password');
+
+        done();
+
+      });
+
+    });
+
+  // User create - payload is present but in the wrong format
+  // here is where we need to add validation with Joi:
+
+  // expect payload to contain: username string
+  // expect payload to contain: password string
+  // expect payload to contain: contact object, length: 3
+  // expect payload to contain: contact object.name: string
+  // expect payload to contain: contact object.phone: string
+  // expect payload to contain: contact object.email: string
 
 
-
-  // @todo All other CRUD errors should be caught and handled by the API code as generic 500 'its broken' message
-  // and the specifics logged and emailed to me
+  // @todo User delete
+  // @todo User update
+  // @todo All other CRUD errors should be handled by the API code as generic 500 'its broken' message
+  // and the specifics logged and emailed to me. At the moment I'm throwing them so I can see immediately if something breaks.
   // @todo Any invalid request methods are already handled by HAPI as 400 - but still need tests for this
 
 });

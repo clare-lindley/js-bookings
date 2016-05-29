@@ -18,11 +18,14 @@ module.exports = function(){
 
         user.save(function(err, user){
           if(err){
-            if(err.code === 11000){
+            if(err.code === 11000){ // MongoDB Duplicate Key Error
               reply(Boom.badRequest('User already exists'));
             }
+            else if(err.name == 'ValidationError') { // Note: Mongoose errors don't have error codes
+              reply(Boom.badRequest('Missing Username or Password'));
+            }
             else {
-              reply(Boom.badImplementation());
+              throw err;
             }
           }
           else {
@@ -47,12 +50,11 @@ module.exports = function(){
         User.findById(request.params.id, function (err, user) {
 
           if (err){
-            // @todo replce with check for Error code
-            if(err.name == 'CastError'){
+            if(err.name == 'CastError'){ // Note: Mongoose errors don't have error codes
               reply(Boom.badRequest('Invalid User Id'));
             }
             else {
-              reply(Boom.badImplementation());
+              throw err;
             }
           }
           else {
