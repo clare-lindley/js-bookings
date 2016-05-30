@@ -1,4 +1,4 @@
-# js-bookings
+# js-bookings: REST API to learn the HAPI Framework and Mongoose
 
 **Testing:**   
 Uses the 'Lab' testing Framework + the 'Code' Assertion Library  
