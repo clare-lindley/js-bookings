@@ -1,10 +1,14 @@
 # js-bookings
 
-Testing: 
-Uses Lab Framework + Code Assertion Library
-Run: npm test
+**Testing:**   
+Uses the 'Lab' testing Framework + the 'Code' Assertion Library  
+**To run the tests:** npm test
 
-Usage:
-Run: node index.js
+**Usage:**  
+**To start the server:** node index.js    
 
-Server is running at localhost:3000
+The server is running at localhost:3000    
+
+**Currently taking a break from this API dev to get my head around
+how the hell to handle uncaught exceptions in node! :S ??? 
+https://www.joyent.com/developers/node/design/errors**
