@@ -1,7 +1,7 @@
 # js-bookings: REST API to learn the HAPI Framework and Mongoose
 
 **Testing:**   
-Uses the '[Lab][https://github.com/hapijs/lab]' testing Framework + the 'Code' Assertion Library  
+Uses the '[Lab](https://github.com/hapijs/lab)' testing Framework + the '[Code](https://github.com/hapijs/code)' Assertion Library  
 **To run the tests:** `npm test`
 
 **Usage:**  
